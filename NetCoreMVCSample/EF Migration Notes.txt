@@ -1,0 +1,20 @@
+﻿Add EF functionality in NET COre Application
+
+Install Packages - 
+	Microsoft.EntityFrameworkCore.SqlServer 3.0.0
+	Microsoft.EntityFrameworkCore.Tools 3.0.0
+
+Update the Repo and DBContext file and Startup file to use real repo file.
+
+After doing above task, now its turn to add DB with help of migration for this we need to commands in package manager console
+
+******************add-migration <MigrationName>  ==== > add-migration InitialMigration**************
+This will create the migration folder which contains the code for to create table and drop if required, now its turn to create DB by using update-database command
+
+************** update-database ******************
+
+This will create the DB in our Database (SQL Server)
+
+In case we need to update or seed data in our DB we can run again add-migration. ==> add-migration SeedMigration
+After adding second migration, run the update-database command to update the DB.
+
