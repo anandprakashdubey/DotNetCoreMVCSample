@@ -32,6 +32,11 @@ namespace NetCoreMVCSample
             services.AddScoped<IPieRepository, PieRepository>();
             services.AddScoped<ICategoryRepository, CategoryRepository>();
 
+            //GETCart method invoke as soon as user gives http request. It checks for any existing cart or create new one if it doesnt.
+            services.AddScoped<ShoppingCart>(sp => ShoppingCart.GetCart(sp));
+            services.AddHttpContextAccessor();
+            services.AddSession();
+
             services.AddControllersWithViews();
         }
 
@@ -45,13 +50,16 @@ namespace NetCoreMVCSample
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
+            app.UseSession();
+
+
             app.UseRouting();
 
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Pie}/{action=List}/{id?}"
+                    pattern: "{controller=Home}/{action=Index}/{id?}"
                 );
 
                 //endpoints.MapGet("/", async context =>
